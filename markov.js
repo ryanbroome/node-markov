@@ -1,6 +1,4 @@
 class MarkovMachine {
-  /** build markov machine; read in text.*/
-
   constructor(text) {
     let words = text.split(/[ \r\n]+/);
     this.words = words.filter((c) => c !== "");
@@ -8,12 +6,6 @@ class MarkovMachine {
     this.makeChains();
   }
 
-  //   /** set markov chains:
-  //    *
-  //    *  for text of "the cat in the hat", chains will be
-  //    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
-
-  // refactor to use maybe find, filter, map or forEach or some other AAmethod
   makeChains() {
     const words = this.words;
     const chains = this.chains;
@@ -47,8 +39,8 @@ class MarkovMachine {
     // push first random selected word into array
     result.push(currentWord);
 
-    // loop numWords times, each time get the possible next words based on  currentWord value or STATE
-    //  select random next word and push to array, set the state to be the next word.
+    // loop numWords times, get the possible next words based on currentWord
+    //  select random word from PNWords push to array, set the state to be the random word.
     // repeat until we reach an array that's length = numWords
     for (let i = 0; i < numWords - 1; i++) {
       let possible = this.chains[currentWord];
@@ -57,9 +49,10 @@ class MarkovMachine {
       result.push(next);
       currentWord = next;
     }
-    // instantiate
+    // instantiate response string
     let resultString = "";
-    // loop over result array and add each word to the string followed by a space
+
+    // loop over result array and add each word to the response string followed by a space
     for (let i = 0; i < result.length; i++) {
       resultString += result[i] + " ";
     }
@@ -73,3 +66,8 @@ class MarkovMachine {
 }
 
 const test = new MarkovMachine("the cat in the hat and the bat in the rat");
+
+// export the class to be used for testing and reading files to export machine typed / learned text
+module.exports = {
+  MarkovMachine: MarkovMachine,
+};
