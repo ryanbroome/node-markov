@@ -65,8 +65,6 @@ class MarkovMachine {
   }
 }
 
-const test = new MarkovMachine("the cat in the hat and the bat in the rat");
-
 // export the class to be used for testing and reading files to export machine typed / learned text
 module.exports = {
   MarkovMachine: MarkovMachine,

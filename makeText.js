@@ -1,15 +1,16 @@
 /** Command-line tool to generate Markov text. */
 
 // require needed modules to read a file and make a basic GET request, require our MarkovMachine, save command line arguments to args
-const fs = require("fs");
-const { MarkovMachine } = require("./markov.js");
-const axios = require("axios");
 const args = process.argv;
 
+const axios = require("axios");
+const fs = require("fs");
+const { MarkovMachine } = require("./markov.js");
+
 // instantiate a new MarkovMachine with text data and call the makeText method to print 100 words.
-function handleOutput(text) {
+function handleOutput(text, numWords = 100) {
   const mm = new MarkovMachine(text);
-  console.log(mm.makeText(100));
+  console.log(mm.makeText(numWords));
 }
 
 // read a file when given a path parameter , print error if any otherwise feed it to the handler
